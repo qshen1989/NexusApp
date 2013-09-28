@@ -1,5 +1,5 @@
 Ti.include('../logic/CommonFunctions.js');
-function WelcomeView() {
+function PersonalInfoView() {
 	//create object instance, a parasitic subclass of Observable
 	var self = Ti.UI.createView({
 		backgroundImage:'images/WelcomePage/welcomeBG.png'
@@ -18,7 +18,6 @@ function WelcomeView() {
 	loginBtn.addEventListener('click', function(e) {
 		var LoginWindow = require('ui/handheld/LoginWindow');
 		var loginWindow = new LoginWindow();
-		loginWindow.setOpacity(0);
 		setLoginWindow(loginWindow);
 		self.animate(get_darken);
 		setTimeout(function(){
@@ -29,4 +28,4 @@ function WelcomeView() {
 	return self;
 }
 
-module.exports = WelcomeView;
+module.exports = PersonalInfoView;

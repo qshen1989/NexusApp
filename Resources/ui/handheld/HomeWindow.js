@@ -1,8 +1,7 @@
 //Application Window Component Constructor
-
-function LoginWindow() {
+function HomeWindow() {
 	//load component dependencies
-	var LoginView = require('ui/common/LoginView');
+	var HomeView = require('ui/common/HomeView');
 		
 	//create component instance
 	var self = Ti.UI.createWindow({
@@ -10,11 +9,12 @@ function LoginWindow() {
 	});
 		
 	//construct UI
-	var loginView = new LoginView();
-	self.add(loginView);
+	var homeView = new HomeView();
+	self.add(homeView);
 	
 	return self;
+	
 }
 
 //make constructor function the public component interface
-module.exports = LoginWindow;
+module.exports = HomeWindow;
