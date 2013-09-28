@@ -1,7 +1,7 @@
 //Application Window Component Constructor
-function MainWindow() {
+function TopicsWindow() {
 	//load component dependencies
-	var MainWindowTabGroup = require('ui/common/MainWindowTabGroup');
+	var TopicsView = require('ui/common/TopicsView');
 		
 	//create component instance
 	var self = Ti.UI.createWindow({
@@ -9,13 +9,12 @@ function MainWindow() {
 	});
 		
 	//construct UI
-	var tabGroup = new MainWindowTabGroup();
-	self.add(tabGroup);
-		tabGroup.open();
+	var topicsView = new TopicsView();
+	self.add(topicsView);
 	
 	return self;
 	
 }
 
 //make constructor function the public component interface
-module.exports = MainWindow;
+module.exports = TopicsWindow;

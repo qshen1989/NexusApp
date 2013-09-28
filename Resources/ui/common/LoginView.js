@@ -170,11 +170,11 @@ function login(username, password, view) {
 		if (getResponseCode() == 1) {
 			//succeed
 			clearInterval(checker);
-			var HomeWindow = require('ui/handheld/HomeWindow');
-			var homeWindow = new HomeWindow();
-			homeWindow.setOpacity(0);
+			var MainWindow = require('ui/handheld/MainWindow');
+			var mainWindow = new MainWindow();
+			mainWindow.setOpacity(0);
 			view.animate(get_darken);
-			homeWindow.open(get_lighter);
+			mainWindow.open(get_lighter);
 		} else if (getResponseCode() == -1) {
 			//failed
 			alert('Login failed. Please check your username or password');
@@ -202,11 +202,11 @@ function fbLogin(fb, view) {
 		} else if (getResponseCode() == 2) {
 			//old user
 			clearInterval(checker);
-			var HomeWindow = require('ui/handheld/HomeWindow');
-			var homeWindow = new HomeWindow();
-			homeWindow.setOpacity(0);
+			var MainWindow = require('ui/handheld/MainWindow');
+			var mainWindow = new MainWindow();
+			mainWindow.setOpacity(0);
 			view.animate(get_darken);
-			homeWindow.open(get_lighter);
+			mainWindow.open();
 		} else if (getResponseCode() == -2) {
 			//error
 			alert('Connection Error. Please try again later');
