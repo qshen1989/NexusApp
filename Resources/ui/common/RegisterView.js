@@ -5,15 +5,18 @@ function RegisterView() {
 		//backgroundImage:'images/WelcomePage/welcomeBG.png'
 		borderColor : '#0000C6',
 		borderWidth : 2,
-		maxZoomScale : 1.5,
+		maxZoomScale : 1.0,
 		minZoomScale : 1.0,
 		showHorizontalScrollIndicator : false,
-		showVerticalScrollIndicator : false,
+		showVerticalScrollIndicator : true,
 		horizontalBounce : false,
 		verticalBounce : true,
-	});
-	
+		scrollingEnabled:true,
+	});	
+
 	var view = Ti.UI.createView({
+		height : 500,
+		//backgroundColor:'#845744'
 	});
 	self.add(view);
 	//label using localization-ready strings from <app dir>/i18n/en/strings.xml
@@ -21,7 +24,7 @@ function RegisterView() {
 		hintText : 'Username',
 		borderStyle : Ti.UI.INPUT_BORDERSTYLE_LINE,
 		clearButtonMode : Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
-		autocapitalization:false,
+		autocapitalization : false,
 		width : pxToDP(405),
 		height : 40,
 		left : 40,
@@ -33,8 +36,8 @@ function RegisterView() {
 		hintText : 'Password',
 		borderStyle : Ti.UI.INPUT_BORDERSTYLE_LINE,
 		clearButtonMode : Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
-		autocapitalization:false,
-		passwordMask:true,
+		autocapitalization : false,
+		passwordMask : true,
 		width : pxToDP(405),
 		height : 40,
 		left : 40,
@@ -46,8 +49,8 @@ function RegisterView() {
 		hintText : 'Confirm Password',
 		borderStyle : Ti.UI.INPUT_BORDERSTYLE_LINE,
 		clearButtonMode : Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
-		autocapitalization:false,
-		passwordMask:true,
+		autocapitalization : false,
+		passwordMask : true,
 		width : pxToDP(405),
 		height : 40,
 		left : 40,
@@ -59,7 +62,7 @@ function RegisterView() {
 		hintText : 'Last Name',
 		borderStyle : Ti.UI.INPUT_BORDERSTYLE_LINE,
 		clearButtonMode : Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
-		autocapitalization:false,
+		autocapitalization : false,
 		width : pxToDP(200),
 		height : 40,
 		left : 30,
@@ -71,29 +74,24 @@ function RegisterView() {
 		hintText : 'First Name',
 		borderStyle : Ti.UI.INPUT_BORDERSTYLE_LINE,
 		clearButtonMode : Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
-		autocapitalization:false,
+		autocapitalization : false,
 		width : pxToDP(200),
 		height : 40,
 		left : 160,
 		top : 300
 	});
 	view.add(firstNameBox);
-	
-	lastNameBox.addEventListener('focus',function(e){
-		view.setHeight(Titanium.Platform.displayCaps.platformHeight+10);
-		self.scrollTo(0,30);
-	});
-	
-	lastNameBox.addEventListener('blur',function(e){
-		view.setHeight(Titanium.Platform.displayCaps.platformHeight);
-		self.scrollToBottom();
-	});
+
+
+	//lastNameBox.addEventListener('blur', function(e) {
+	//	self.scrollTo(0,0);
+	//});
 
 	var emailBox = Ti.UI.createTextField({
 		hintText : 'Email',
 		borderStyle : Ti.UI.INPUT_BORDERSTYLE_LINE,
 		clearButtonMode : Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
-		autocapitalization:false,
+		autocapitalization : false,
 		width : pxToDP(405),
 		height : 40,
 		left : 40,
@@ -128,19 +126,18 @@ function RegisterView() {
 		} else if (password != repassword) {
 			alert('Passwords are not the same');
 			return;
-		}else if(isNull(firstname)){
+		} else if (isNull(firstname)) {
 			alert('Last name cannot be empty');
 			return;
-		} else if(isNull(lastname)){
+		} else if (isNull(lastname)) {
 			alert('First name cannot be empty');
 			return;
-		}
-		else if (!isEmail(email)) {
+		} else if (!isEmail(email)) {
 			alert('Email is not valid');
 			return;
 		} else {
 			password = Titanium.Utils.md5HexDigest(password);
-			register(username,password,firstname,lastname,email);
+			register(username, password, firstname, lastname, email);
 		}
 
 	});
@@ -161,19 +158,25 @@ function RegisterView() {
 	return self;
 }
 
-function register(username,password,firstname,lastname,email){
-	getRegisterResponse(username,password,firstname,lastname,email);
-	var checker = setInterval(function(){
-	if (getResponseCode() == 1){
-		clearInterval(checker);
-		alert('Username is not available');
-	} else if(getResponseCode() == 2){
-		clearInterval(checker);
-		alert('Register succeed!');
-	} else if(getResponseCode() == -2){
-		alert('Connection Error. Please try again later');
-	}
-	},500);
+function register(username, password, firstname, lastname, email) {
+	getRegisterResponse(username, password, firstname, lastname, email);
+	var checker = setInterval(function() {
+		if (getResponseCode() == 1) {
+			clearInterval(checker);
+			alert('Username is not available');
+		} else if (getResponseCode() == 2) {
+			clearInterval(checker);
+			alert('Register succeed!');
+			var HomeWindow = require('ui/handheld/HomeWindow');
+			var homeWindow = new HomeWindow();
+			homeWindow.setOpacity(0);
+			var registerWindow = getRegisterWindow();
+			registerWindow.close(get_darken);
+			homeWindow.open(get_lighter);
+		} else if (getResponseCode() == -2) {
+			alert('Connection Error. Please try again later');
+		}
+	}, 500);
 }
 
 module.exports = RegisterView;

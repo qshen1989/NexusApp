@@ -72,7 +72,7 @@ function getFBLoginResponse(uid) {
 		// function called when the response data is available
 		onload : function(e) {
 			Ti.API.info('GOT ' + this.responseText);
-			if (this.responseText != 'NEW') {
+			if (this.responseText != 'GOT NEW') {
 				setUserID(this.responseText);
 				responseCode = 2;
 			} else {
@@ -90,7 +90,7 @@ function getFBLoginResponse(uid) {
 		timeout : 5000 // in milliseconds
 	});
 	// Prepare the connection.
-	var url = URL_LOGIN + "?loginType=0&fbuid=" + uid;
+	var url = URL_LOGIN + "?fbuid=" + uid;
 	Titanium.API.info(url);
 	client.open("GET", url);
 	// Send the request.

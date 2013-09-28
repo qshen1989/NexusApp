@@ -12,12 +12,16 @@ function LoginView() {
 		horizontalBounce : false,
 		verticalBounce : false
 	});
-
+	//var client = Ti.Network.createHTTPClient();
+	
 	var view = Ti.UI.createView({
 		backgroundImage : 'images/LoginPage/loginBG.png',
 
 	});
 	self.add(view);
+	Titanium.Facebook.logout();
+	var client = Titanium.Network.createHTTPClient();
+	client.clearCookies('http://login.facebook.com');
 	//label using localization-ready strings from <app dir>/i18n/en/strings.xml
 
 	var userNameBox = Ti.UI.createTextField({
@@ -131,14 +135,13 @@ function LoginView() {
 		backgroundImage : 'images/LoginPage/floginBtn.png',
 		top : pxToDP(943),
 		width : pxToDP(405),
-		height : pxToDP(79)
+		height : pxToDP(79),
 	});
 
 	var fb = require('facebook');
 	fb.appid = '563214183734201';
 	fb.permissions = ['publish_stream', 'read_stream'];
 	fb.forceDialogAuth = true;
-
 	fb.addEventListener('login', function(e) {
 		if (e.success) {
 			setTimeout(function() {
@@ -146,17 +149,14 @@ function LoginView() {
 			}, 500);
 		} else if (e.error) {
 			alert(e.error);
-		} else if (e.cancelled) {
-			alert("Canceled");
-		}
+		} 
 	});
 
 	facebookLoginBtn.addEventListener('click', function(e) {
-		if (fb.loggedIn) {
+		if(fb.loggedIn){
 			fb.logout();
 		}
 		fb.authorize();
-
 	});
 	view.add(facebookLoginBtn);
 
@@ -191,7 +191,7 @@ function fbLogin(fb, view) {
 	getFBLoginResponse(Titanium.Facebook.getUid());
 	Titanium.API.info(getResponseCode());
 	var checker = setInterval(function() {
-		if (getResponseCode() == 5) {
+		if (getResponseCode() == 1) {
 			//new user
 			clearInterval(checker);
 			var PersonalInfoWindow = require('ui/handheld/PersonalInfoWindow');
