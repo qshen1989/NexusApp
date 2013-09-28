@@ -1,7 +1,7 @@
 //Application Window Component Constructor
 function PersonalInfoWindow() {
 	//load component dependencies
-	var PersonalInfoView = require('ui/common/WelcomeView');
+	var PersonalInfoView = require('ui/common/PersonalInfoView');
 		
 	//create component instance
 	var self = Ti.UI.createWindow({
