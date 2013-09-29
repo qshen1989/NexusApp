@@ -36,10 +36,10 @@ function HomeView(uid) {
 			if (getResponseCode() == 1) {
 				clearInterval(checker);
 				data = parseUserInfo();
-				alert(data);
+
 				if (data != null) {
-				var nameLabel = Ti.UI.createLabel({
-				//		text : data[0].firstName + " " + data[0].lastName,
+					var nameLabel = Ti.UI.createLabel({
+						text : data[0].firstName + " " + data[0].lastName,
 						font : {
 							fontSize : 20,
 							fontWeight : 'bold'
@@ -47,19 +47,9 @@ function HomeView(uid) {
 						top : 25,
 						left : 95
 					});
-				view1.add(nameLabel);
-				}
-		var nameLabel = Ti.UI.createLabel({
-			text : data[0].firstName + " " + data[0].lastName,
-			font : {
-				fontSize : 20,
-				fontWeight : 'bold'
-			},
-			top : 25,
-			left : 95
-		});
 
-		view1.add(nameLabel);
+					view1.add(nameLabel);
+				}
 			}
 		}, 500);
 	}

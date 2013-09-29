@@ -25,14 +25,14 @@ function LoginView() {
 	//label using localization-ready strings from <app dir>/i18n/en/strings.xml
 
 	var userNameBox = Ti.UI.createTextField({
-		top : pxToDP(536),
+		top : pxToDP(565),
 		width : pxToDP(405),
 		height : pxToDP(53),
 		hintText : ' Username',
+		left: pxToDP(115),
 		clearButtonMode : Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
 		autocapitalization : false,
 		//borderStyle : Titanium.UI.INPUT_BORDERSTYLE_LINE,
-		backgroundImage : 'images/LoginPage/Log-in_04.png',
 		//borderColor: '#334455',
 		keyboardType : Titanium.UI.KEYBOARD_ASCII
 	});
@@ -53,12 +53,12 @@ function LoginView() {
 	});
 
 	var passwordBox = Ti.UI.createTextField({
-		top : pxToDP(609),
+		top : pxToDP(636),
 		width : pxToDP(405),
 		height : pxToDP(53),
+		left: pxToDP(115),
 		hintText : ' Password',
 		passwordMask : true,
-		backgroundImage : 'images/LoginPage/Log-in_04.png',
 		borderStyle : Titanium.UI.INPUT_BORDERSTYLE_NONE,
 		autocapitalization : false,
 		clearButtonMode : Ti.UI.INPUT_BUTTONMODE_ONFOCUS
@@ -83,9 +83,10 @@ function LoginView() {
 
 	var normalLoginBtn = Ti.UI.createButton({
 		backgroundImage : 'images/LoginPage/loginBtn.png',
-		top : pxToDP(712),
+		top : pxToDP(720),
 		width : pxToDP(405),
-		height : pxToDP(80)
+		height : pxToDP(80),
+		left: pxToDP(115)
 	});
 
 	normalLoginBtn.addEventListener('click', function(e) {
@@ -112,7 +113,7 @@ function LoginView() {
 		color : '#ADADAD',
 		width : 'auto',
 		height : 20,
-		top : pxToDP(810)
+		top : pxToDP(810),
 	});
 
 	registerLabel.addEventListener('touchstart', function(e) {
@@ -133,9 +134,10 @@ function LoginView() {
 
 	var facebookLoginBtn = Ti.UI.createButton({
 		backgroundImage : 'images/LoginPage/floginBtn.png',
-		top : pxToDP(943),
+		top : pxToDP(930),
 		width : pxToDP(405),
 		height : pxToDP(79),
+		left: pxToDP(115)
 	});
 
 	var fb = require('facebook');

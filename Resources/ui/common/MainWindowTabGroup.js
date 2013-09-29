@@ -7,7 +7,7 @@ function MainWindowTabGroup() {
 	FriendsWindow = require('ui/handheld/FriendsWindow');
 	TopicsWindow = require('ui/handheld/TopicsWindow');
 
-	var homeWindow = new HomeWindow();
+	var homeWindow = new HomeWindow(getUserID());
 	var friendsWindow = new FriendsWindow();
 	var topicsWindow = new TopicsWindow();
 

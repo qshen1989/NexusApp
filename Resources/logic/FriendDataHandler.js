@@ -8,7 +8,7 @@ function getFriendList() {
 			id : contents.item(i).getElementsByTagName('friendID').item(0).text,
 			lastname : contents.item(i).getElementsByTagName('lastName').item(0).text,
 			firstname : contents.item(i).getElementsByTagName('firstName').item(0).text,
-			email : contents.item(i).getElementsByTagName('friendID').item(0).text,
+			email : contents.item(i).getElementsByTagName('email').item(0).text,
 		});
 	}
 	return data;

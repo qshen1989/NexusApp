@@ -59,14 +59,15 @@ function FriendsView() {
 			var row = Ti.UI.createTableViewRow();
 			row.backgroundColor = '#fff';
 			row.selectedBackgroundColor = '#385292';
+			row.hasChild = true;
 			row.height = 60;
 
 			var photo = Ti.UI.createView({
 				backgroundImage : '/images/FriendsPage/gator'+(i+1)%5+'.png',
-				//top : 5,
+				top : 0,
 				left : 0,
-				width : 58,
-				height : 58,
+				width : 58.5,
+				height : 58.5,
 				clickName : 'photo'
 			});
 			row.add(photo);
@@ -95,13 +96,15 @@ function FriendsView() {
 	var updating = false;
 	var loadingRow = Ti.UI.createTableViewRow({
 		title : "Loading...",
-		font:{fontSize:13,fontFamliy:'Arial'}
+		font:{fontSize:13,fontFamliy:'Arial'},
+		height:60
 	});
 
 	function beginUpdate() {
 		//self.setTop(20);
 		updating = true;
 		//tableData.push(loadingRow);
+		//self.setScrollable(false);
 		tableData = [];
 		getFriends();
 		self.insertRowBefore(0,loadingRow, {
@@ -124,6 +127,7 @@ function FriendsView() {
 			position : Ti.UI.iPhone.TableViewScrollPosition.NONE
 		});
 		self.animate({top:0,duration:300});
+		//self.setScrollable(true);
 	}
 
 	var lastDistance = 0;
@@ -139,7 +143,7 @@ function FriendsView() {
 		// going down is the only time we dynamically load,
 		// going up we can safely ignore -- note here that
 		// the values will be negative so we do the opposite
-		if (offset < -50) {
+		if (offset < -30) {
 			// adjust the % of rows scrolled before we decide to start fetching
 			var nearEnd = theEnd * .75;
 

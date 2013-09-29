@@ -1,7 +1,7 @@
 Ti.include('../logic/UserData.js');
 
 //Application Window Component Constructor
-function HomeWindow() {
+function HomeWindow(id) {
 	//load component dependencies
 	var HomeView = require('ui/common/HomeView');
 		
@@ -12,7 +12,7 @@ function HomeWindow() {
 	});
 		
 	//construct UI
-	var homeView = new HomeView(getUserID());
+	var homeView = new HomeView(id);
 	self.add(homeView);
 	
 	return self;

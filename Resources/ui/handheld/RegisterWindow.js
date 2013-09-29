@@ -10,6 +10,12 @@ function RegisterWindow() {
 	});
 		
 	//construct UI
+	var topView = Ti.UI.createView({
+		backgroundImage:'images/RegisterPage/topBar2.png',
+		zIndex:5,
+		height:pxToDP(89),
+	});
+	self.add(topView);
 	var registerView = new RegisterView();
 	self.add(registerView);
 	

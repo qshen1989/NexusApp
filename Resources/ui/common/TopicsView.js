@@ -7,7 +7,6 @@ function TopicsView() {
 	//label using localization-ready strings from <app dir>/i18n/en/strings.xml
 	var self = Titanium.UI.createTableView({
 		//backgroundColor:'#220992',
-		top : 40,
 		data : [],
 		filterAttribute : 'filter',
 		backgroundColor : 'white'
@@ -18,7 +17,22 @@ function TopicsView() {
 	setTableData();
 	
 	function setTableData() {
-		data = getTopicList();
+		data = getFriendList();
+		if (Titanium.App.Properties.getString('TopicList') == null) {
+			getTopicsByPopularity();
+			var checker = setInterval(function() {
+				if (getResponseCode() == 1) {
+					clearInterval(checker);
+					data = getTopicList();
+				} else if (getResponseCode() == -2) {
+					clearInterval(checker);
+					alert('Connection Error');
+				}
+			}, 500);
+		} else {
+			Titanium.API.info(Titanium.App.Properties.getString('TopicList'));
+			data = getTopicList();
+		}
 		for (var i = 0; i < data.length; ++i) {
 			var row = Ti.UI.createTableViewRow();
 			row.selectedBackgroundColor = '#f2f2f2';
@@ -102,7 +116,6 @@ function TopicsView() {
 
 			tableData.push(row);
 		}
-		self.data = tableData;
 	}
 
 	var updating = false;
@@ -114,7 +127,7 @@ function TopicsView() {
 	function beginUpdate() {
 		updating = true;
 		//tableData.push(loadingRow);
-		self.setTop(60);
+		self.setTop(20);
 		tableData = [];
 		getTopicsByPopularity();
 		self.insertRowBefore(0,loadingRow, {
@@ -126,19 +139,17 @@ function TopicsView() {
 	}
 
 	function endUpdate() {
-		self.deleteRow(0,{
-			animated : true,
-			animationStyle: Titanium.UI.iPhone.RowAnimationStyle.TOP
-		});
+		
 		updating = false;
 		setTableData();
+		self.deleteRow(0);
 		// simulate loading
 		
 		self.scrollToIndex(0, {
 			animated : true,
 			position : Ti.UI.iPhone.TableViewScrollPosition.NONE,
 		});
-		self.animate({top:40,duration:300});
+		self.animate({top:0,duration:300});
 	}
 
 	var lastDistance = 0;
@@ -154,7 +165,7 @@ function TopicsView() {
 		// going down is the only time we dynamically load,
 		// going up we can safely ignore -- note here that
 		// the values will be negative so we do the opposite
-		if (offset < -60 && !updating) {
+		if (offset < -30 && !updating) {
 			// adjust the % of rows scrolled before we decide to start fetching
 			var nearEnd = theEnd * .75;
 
@@ -168,12 +179,12 @@ function TopicsView() {
 		
 		var NewWindow = require(e.rowData.url);
 		var parentWindow = getTopicsWindow();
-		alert(parentWindow.containgTab.title);
+		
 		var newWindow = new NewWindow({title:'haha',tabGroup:parentWindow.tabGroup});
 		newWindow.setLeft(320);
 		newWindow.open(slip_from_right);
 	});
-	
+	self.setData(tableData);
 	return self;
 }
 
