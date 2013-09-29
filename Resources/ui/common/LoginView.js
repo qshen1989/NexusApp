@@ -176,7 +176,11 @@ function login(username, password, view) {
 			view.animate(get_darken);
 			mainWindow.open(get_lighter);*/
 			var Group = require('ui/common/MainWindowTabGroup');
-			new Group().open();
+			var group = new Group();
+			group.setOpacity(0);
+			var loginWindow = getLoginWindow();
+			loginWindow.animate(get_darken);
+			group.open(get_lighter);
 		} else if (getResponseCode() == -1) {
 			//failed
 			alert('Login failed. Please check your username or password');
@@ -211,7 +215,11 @@ function fbLogin(fb, view) {
 			mainWindow.open(get_lighter);*/
 			
 			var Group = require('ui/common/MainWindowTabGroup');
-			new Group().open();
+			var group = new Group();
+			group.setOpacity(0);
+			var loginWindow = getLoginWindow();
+			loginWindow.animate(get_darken);
+			group.open(get_lighter);
 		} else if (getResponseCode() == -2) {
 			//error
 			alert('Connection Error. Please try again later');

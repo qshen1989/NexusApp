@@ -164,7 +164,7 @@ function getTopicsByPopularity(){
 		// function called when the response data is available
 		onload : function(e) {
 			Ti.API.info('GOT ' + this.responseText);
-				Titanium.App.Properties.setObject('TopicList',this.responseXML);
+				Titanium.App.Properties.setString('TopicList',this.responseText);
 				responseCode = 1;
 			//alert('success');
 		},

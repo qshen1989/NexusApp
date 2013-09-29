@@ -5,14 +5,18 @@ function TopicsView() {
 	//});
 	
 	//label using localization-ready strings from <app dir>/i18n/en/strings.xml
-	var self = Titanium.UI.createView({
-		backgroundColor:'#220992',
+	var self = Titanium.UI.createTableView({
+		//backgroundColor:'#220992',
 		top:40,
+		data:[],
+		filterAttribute:'filter',
+		backgroundColor:'white'
 	});
 	
-	self.addEventListener('open',function(e){
-		
+	self.addEventListener('click',function(e){
+		Titanium.API.info('haha');
 	});
+	
 
 	return self;
 }

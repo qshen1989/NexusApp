@@ -29,8 +29,9 @@ function MainWindowTabGroup() {
 		title : 'Topics',
 		window : topicsWindow
 	});
-	
-	topicsTab.addEventListener('click',function(e){
+	topicsWindow.containgTab = topicsTab;
+	self.addEventListener('click',function(e){
+		Titanium.API.info(e.index);
 		getTopicsByPopularity();
 		var checker = setInterval(function(){
 			if (getResponseCode() == 1){
