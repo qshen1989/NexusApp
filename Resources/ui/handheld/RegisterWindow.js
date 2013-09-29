@@ -14,6 +14,7 @@ function RegisterWindow() {
 		backgroundImage:'images/RegisterPage/topBar2.png',
 		zIndex:5,
 		height:pxToDP(89),
+		top:0
 	});
 	self.add(topView);
 	var registerView = new RegisterView();
