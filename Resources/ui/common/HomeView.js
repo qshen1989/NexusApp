@@ -9,6 +9,7 @@ function HomeView(uid) {
 	//label using localization-ready strings from <app dir>/i18n/en/strings.xml
 
 	var self = Ti.UI.createScrollView({
+		backgroundImage : 'images/home/Homepage_02.png',
 		maxZoomScale : 1.0,
 		minZoomScale : 1.0,
 		showHorizontalScrollIndicator : false,
@@ -20,9 +21,10 @@ function HomeView(uid) {
 	});
 
 	var view1 = Titanium.UI.createView({
-		backgroundColor : '#ff3322',
-		height : 100,
-		top : 0
+		width: pxToDP(639),
+		height : pxToDP(283),
+		top : 0,
+		backgroundImage: 'images/home/Homepage_03.png',
 	});
 
 	self.add(view1);
