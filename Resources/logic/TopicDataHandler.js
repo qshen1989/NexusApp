@@ -23,7 +23,6 @@ function getMyTopicList() {
 		for (var i = 0; i < contents.length; ++i) {
 			data.push({
 				id : contents.item(i).getElementsByTagName('topicID').item(0).text,
-				popularity : contents.item(i).getElementsByTagName('popularity').item(0).text,
 				content : contents.item(i).getElementsByTagName('content').item(0).text,
 			});
 		}
