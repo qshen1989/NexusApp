@@ -12,15 +12,19 @@ function TopicsView() {
 		filterAttribute : 'filter',
 		backgroundColor : 'white'
 	});
+	
 	var data;
 	var tableData = [];
 	setTableData();
+	
 	function setTableData() {
 		data = getTopicList();
 		for (var i = 0; i < data.length; ++i) {
 			var row = Ti.UI.createTableViewRow();
 			row.selectedBackgroundColor = '#f2f2f2';
 			row.height = 100;
+			row.hasChild = true;
+			row.url = '../ui/handheld/TopicContentWindow.js';
 
 			var photo = Ti.UI.createView({
 				backgroundImage : '/images/TopicsPage/user.png',
@@ -103,29 +107,38 @@ function TopicsView() {
 
 	var updating = false;
 	var loadingRow = Ti.UI.createTableViewRow({
-		title : "Loading..."
+		title : "Loading...",
+		height:50
 	});
 
 	function beginUpdate() {
 		updating = true;
 		//tableData.push(loadingRow);
+		self.setTop(60);
 		tableData = [];
 		getTopicsByPopularity();
-		self.appendRow(loadingRow);
+		self.insertRowBefore(0,loadingRow, {
+			animated : true,
+			animationStyle : Titanium.UI.iPhone.RowAnimationStyle.TOP
+		});
 		// just mock out the reload
 		setTimeout(endUpdate, 2000);
 	}
 
 	function endUpdate() {
+		self.deleteRow(0,{
+			animated : true,
+			animationStyle: Titanium.UI.iPhone.RowAnimationStyle.TOP
+		});
 		updating = false;
 		setTableData();
 		// simulate loading
-
-		// just scroll down a bit to the new rows to bring them into view
+		
 		self.scrollToIndex(0, {
 			animated : true,
-			position : Ti.UI.iPhone.TableViewScrollPosition.TOP
+			position : Ti.UI.iPhone.TableViewScrollPosition.NONE,
 		});
+		self.animate({top:40,duration:300});
 	}
 
 	var lastDistance = 0;
@@ -141,7 +154,7 @@ function TopicsView() {
 		// going down is the only time we dynamically load,
 		// going up we can safely ignore -- note here that
 		// the values will be negative so we do the opposite
-		if (distance < lastDistance) {
+		if (offset < -60 && !updating) {
 			// adjust the % of rows scrolled before we decide to start fetching
 			var nearEnd = theEnd * .75;
 
@@ -151,7 +164,10 @@ function TopicsView() {
 		}
 		lastDistance = distance;
 	});
-
+	self.addEventListener('click',function(e){
+		alert(e.index);
+	});
+	
 	return self;
 }
 

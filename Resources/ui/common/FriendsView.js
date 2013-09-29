@@ -17,7 +17,6 @@ function FriendsView() {
 		filterAttribute : 'filter',
 		backgroundColor : 'white',
 		showVerticalScrollIndicator:true,
-		headerView: view
 	});
 
 	var search = Titanium.UI.createSearchBar({
@@ -39,6 +38,7 @@ function FriendsView() {
 	setTableData();
 
 	function setTableData() {
+		data = getFriendList();
 		if (Titanium.App.Properties.getString('FriendList') == null) {
 			getFriends();
 			var checker = setInterval(function() {
@@ -59,14 +59,14 @@ function FriendsView() {
 			var row = Ti.UI.createTableViewRow();
 			row.backgroundColor = '#fff';
 			row.selectedBackgroundColor = '#385292';
-			row.height = 40;
+			row.height = 60;
 
 			var photo = Ti.UI.createView({
-				backgroundImage : '/images/FriendsPage/user.png',
-				top : 5,
-				left : 10,
-				width : 20,
-				height : 20,
+				backgroundImage : '/images/FriendsPage/gator'+(i+1)%5+'.png',
+				//top : 5,
+				left : 0,
+				width : 58,
+				height : 58,
 				clickName : 'photo'
 			});
 			row.add(photo);
@@ -74,11 +74,11 @@ function FriendsView() {
 			var user = Ti.UI.createLabel({
 				color : '#576996',
 				font : {
-					fontSize : 16,
+					fontSize : 20,
 					fontWeight : 'bold',
 					fontFamily : 'Arial'
 				},
-				left : 70,
+				left : 90,
 				top : 10,
 				height : 30,
 				width : 200,
@@ -95,11 +95,11 @@ function FriendsView() {
 	var updating = false;
 	var loadingRow = Ti.UI.createTableViewRow({
 		title : "Loading...",
-		font:{fontSize:10,fontFamliy:'Arial'}
+		font:{fontSize:13,fontFamliy:'Arial'}
 	});
 
 	function beginUpdate() {
-		self.setTop(20);
+		//self.setTop(20);
 		updating = true;
 		//tableData.push(loadingRow);
 		tableData = [];
@@ -150,7 +150,7 @@ function FriendsView() {
 		lastDistance = distance;
 	});
 
-	self.setSearch(search);
+	//self.setSearch(search);
 	self.setData(tableData);
 
 	return self;
