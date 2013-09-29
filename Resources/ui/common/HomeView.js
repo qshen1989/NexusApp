@@ -29,30 +29,29 @@ function HomeView(uid) {
 	//
 	var data = [];
 	initData();
-	
+
 	function initData() {
 		getUserInfo(uid);
-		var checker = setInterval(function(){
-			if (getResponseCode() == 1){
+		var checker = setInterval(function() {
+			if (getResponseCode() == 1) {
 				clearInterval(checker);
 				data = parseUserInfo();
 				alert(data);
-		var nameLabel = Ti.UI.createLabel({
-			text : data[0].firstName + " " + data[0].lastName,
-			font : {
-				fontSize : 20,
-				fontWeight : 'bold'
-			},
-			top : 25,
-			left : 95
-		});
-
-		view1.add(nameLabel);
+				if (data != null) {
+				var nameLabel = Ti.UI.createLabel({
+				//		text : data[0].firstName + " " + data[0].lastName,
+						font : {
+							fontSize : 20,
+							fontWeight : 'bold'
+						},
+						top : 25,
+						left : 95
+					});
+				view1.add(nameLabel);
+				}
 			}
-		},500);
+		}, 500);
 	}
-
-		
 
 	var photo = Ti.UI.createView({
 		backgroundImage : '/images/FriendsPage/user.png',
