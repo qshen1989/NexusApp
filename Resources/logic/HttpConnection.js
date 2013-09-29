@@ -1,4 +1,5 @@
 Ti.include('UserData.js');
+Ti.include('FriendDataHandler.js');
 var URL_LOGIN = "http://192.168.1.107/myWOW/login.php";
 var URL_REGISTER = "http://192.168.1.107/myWOW/register.php";
 var URL_DATA = "http://192.168.1.107/myWOW/topic.php";
@@ -137,8 +138,8 @@ function refillPersonalInfo(lastname, firstname, email, fbuid) {
 		// function called when the response data is available
 		onload : function(e) {
 			Ti.API.info('GOT ' + this.responseText);
-				setUserID(this.responseText);
-				responseCode = 1;
+			setUserID(this.responseText);
+			responseCode = 1;
 			//alert('success');
 		},
 		// function called when an error occurs, including a timeout
@@ -150,22 +151,22 @@ function refillPersonalInfo(lastname, firstname, email, fbuid) {
 		timeout : 5000 // in milliseconds
 	});
 	// Prepare the connection.
-	var url = URL_REGISTER + "?lastName=" + lastname + "&firstName=" + firstname + "&email=" + email +"&fbuid=" + fbuid;
+	var url = URL_REGISTER + "?lastName=" + lastname + "&firstName=" + firstname + "&email=" + email + "&fbuid=" + fbuid;
 	Titanium.API.info(url);
 	client.open("GET", url);
 	// Send the request.
 	client.send();
 }
 
-function getTopicsByPopularity(){
+function getTopicsByPopularity() {
 	responseCode = 0;
 	Titanium.API.info("get Topics");
 	var client = Ti.Network.createHTTPClient({
 		// function called when the response data is available
 		onload : function(e) {
 			Ti.API.info('GOT ' + this.responseText);
-				Titanium.App.Properties.setString('TopicList',this.responseText);
-				responseCode = 1;
+			Titanium.App.Properties.setString('TopicList', this.responseText);
+			responseCode = 1;
 			//alert('success');
 		},
 		// function called when an error occurs, including a timeout
@@ -182,29 +183,29 @@ function getTopicsByPopularity(){
 	client.open("GET", url);
 	// Send the request.
 	client.send();
-	
+
 }
 
-function getTopicsByTime(){
+function getTopicsByTime() {
 	Titanium.API.info('haha');
 }
 
-function getTopicDetails(topicID){
-	
+function getTopicDetails(topicID) {
+
 }
 
-function getTopicsByFriends(userID){
-	
+function getTopicsByFriends(userID) {
+
 }
 
-function getFriends(){
+function getFriends() {
 	responseCode = 0;
 	var client = Ti.Network.createHTTPClient({
 		// function called when the response data is available
 		onload : function(e) {
-			    Ti.API.info('GOT ' + this.responseText);
-				Ti.App.Properties.setString('FriendList', this.responseText);
-				responseCode = 1;
+			Ti.API.info('GOT FRIENDS' + this.responseText);
+			Ti.App.Properties.setString('FriendList', this.responseText);
+			responseCode = 1;
 		},
 		// function called when an error occurs, including a timeout
 		onerror : function(e) {
@@ -216,6 +217,65 @@ function getFriends(){
 	});
 	// Prepare the connection.
 	var url = URL_DATA + "?f=showFriends&userID=" + getUserID();
+	Titanium.API.info(url);
+	client.open("GET", url);
+	// Send the request.
+	client.send();
+}
+
+function isFriends(uid1, uid2) {
+	responseCode = 0;
+	var client = Ti.Network.createHTTPClient({
+		// function called when the response data is available
+		onload : function(e) {
+			Ti.API.info('GOT ISFRIENDS' + this.responseText);
+			if (this.responseText == '1') {
+				//friends
+				responseCode = 1;
+			} else {
+				//not friends
+				responseCode = 2;
+			}
+
+			//alert('success');
+		},
+		// function called when an error occurs, including a timeout
+		onerror : function(e) {
+			Ti.API.debug(e.error);
+			responseCode = -2;
+			//alert('error');
+		},
+		timeout : 5000 // in milliseconds
+	});
+	// Prepare the connection.
+	var url = URL_DATA + '?f=isFriends&userID1=' + uid1 + "&userID2=" + uid2;
+	Titanium.API.info(url);
+	client.open("GET", url);
+	// Send the request.
+	client.send();
+}
+
+function getUserInfo(uid){
+	responseCode = 0;
+	var client = Ti.Network.createHTTPClient({
+		// function called when the response data is available
+		onload : function(e) {
+			Ti.API.info('GOT USERINFO ' + this.responseText);
+			Ti.App.Properties.setString('UserInfo', this.responseText);
+			//parseUserInfo();
+			responseCode = 1;
+			//alert('success');
+		},
+		// function called when an error occurs, including a timeout
+		onerror : function(e) {
+			Ti.API.debug(e.error);
+			responseCode = -2;
+			//alert('error');
+		},
+		timeout : 5000 // in milliseconds
+	});
+	// Prepare the connection.
+	var url = URL_DATA + '?f=showMyInfo&userID='+uid;
 	Titanium.API.info(url);
 	client.open("GET", url);
 	// Send the request.

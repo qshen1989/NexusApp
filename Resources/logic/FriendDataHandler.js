@@ -1,14 +1,31 @@
-function getFriendList(){
+function getFriendList() {
 	var xml = Titanium.App.Properties.getString('FriendList');
 	xml = Titanium.XML.parseString(xml);
 	var contents = xml.documentElement.getElementsByTagName('friend');
 	var data = [];
-	for (var i=0;i<contents.length;++i){
+	for (var i = 0; i < contents.length; ++i) {
 		data.push({
-			id: contents.item(i).getElementsByTagName('friendID').item(0).text,
-			lastname: contents.item(i).getElementsByTagName('lastName').item(0).text,
-			firstname: contents.item(i).getElementsByTagName('firstName').item(0).text,
-			email: contents.item(i).getElementsByTagName('friendID').item(0).text,
+			id : contents.item(i).getElementsByTagName('friendID').item(0).text,
+			lastname : contents.item(i).getElementsByTagName('lastName').item(0).text,
+			firstname : contents.item(i).getElementsByTagName('firstName').item(0).text,
+			email : contents.item(i).getElementsByTagName('friendID').item(0).text,
+		});
+	}
+	return data;
+}
+
+function parseUserInfo() {
+	var xml = Titanium.App.Properties.getString('UserInfo');
+
+	xml = Titanium.XML.parseString(xml);
+	var user = xml.documentElement.getElementsByTagName('Info');
+	var data = [];
+	for (var i = 0; i < user.length; ++i) {
+		data.push({
+			userName : user.item(0).getElementsByTagName('userName').item(0).text,
+			email : user.item(0).getElementsByTagName('email').item(0).text,
+			firstName : user.item(0).getElementsByTagName('firstName').item(0).text,
+			lastName : user.item(0).getElementsByTagName('lastName').item(0).text
 		});
 	}
 	return data;
