@@ -30,8 +30,8 @@ function MainWindowTabGroup() {
 		window : topicsWindow
 	});
 	
-	topicsTab.addEventListener('focus',function(e){
-		getTopics();
+	topicsTab.addEventListener('click',function(e){
+		getTopicsByPopularity();
 		var checker = setInterval(function(){
 			if (getResponseCode() == 1){
 				
