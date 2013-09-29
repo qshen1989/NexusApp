@@ -130,6 +130,14 @@ function HomeView(uid) {
 				left : pxToDP(18),
 				height : pxToDP(242),
 			});
+			
+			var userRole;
+			
+			if(i%2==1){
+				userRole = 'Participator';
+			}else{
+				userRole = 'Topic Holder';
+			}
 
 			var user = Ti.UI.createLabel({
 				color : '#000000',
@@ -142,7 +150,7 @@ function HomeView(uid) {
 				height : 20,
 				width : 200,
 				clickName : 'user',
-				text : 'Topic Holder'
+				text : userRole
 			});
 			topicView.add(user);
 
