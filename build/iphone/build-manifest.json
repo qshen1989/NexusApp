@@ -1,0 +1,23 @@
+{
+	"target": "simulator",
+	"deployType": "development",
+	"deviceFamily": "iphone",
+	"iosSdkPath": "/Users/qianshen/Library/Application Support/Titanium/mobilesdk/osx/3.1.3.GA/iphone",
+	"appGuid": "c57fa830-552e-471a-a73b-98c70fd7f93b",
+	"tiCoreHash": "77157e1ffaec640cf559356a147b6a4c",
+	"modulesHash": "99b8ded9a99f5bdd4d27fd817a99bd41",
+	"nativeModulesHash": "39dffd5c15df4f69b6fe63bc978e3b58",
+	"gitHash": "222f4d1",
+	"name": "Nexus",
+	"id": "com.uf.nexus",
+	"analytics": true,
+	"publisher": "qianshen",
+	"url": "http://",
+	"version": "1.0",
+	"description": "not specified",
+	"copyright": "2013 by qianshen",
+	"guid": "c57fa830-552e-471a-a73b-98c70fd7f93b",
+	"skipJSMinification": true,
+	"forceCopy": false,
+	"forceCopyAll": false
+}

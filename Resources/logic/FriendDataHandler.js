@@ -23,12 +23,14 @@ function parseUserInfo() {
 	var firstName = parsedXML.documentElement.getElementsByTagName('firstName').item(0).text;
 	var lastName = parsedXML.documentElement.getElementsByTagName('lastName').item(0).text;
 	var email = parsedXML.documentElement.getElementsByTagName('email').item(0).text;
+	var title = parsedXML.documentElement.getElementsByTagName('title').item(0).text;
 	var data = [];
 	data.push({
 		userName : userName,
 		email : email,
 		firstName : firstName,
-		lastName : lastName
+		lastName : lastName,
+		title : title
 	});
 
 	return data;

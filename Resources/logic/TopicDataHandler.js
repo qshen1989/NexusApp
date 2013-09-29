@@ -24,6 +24,7 @@ function getMyTopicList() {
 			data.push({
 				id : contents.item(i).getElementsByTagName('topicID').item(0).text,
 				content : contents.item(i).getElementsByTagName('content').item(0).text,
+				createTime : contents.item(i).getElementsByTagName('createTime').item(0).text,
 			});
 		}
 	}
