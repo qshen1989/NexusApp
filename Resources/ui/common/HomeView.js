@@ -89,7 +89,7 @@ function HomeView(uid) {
 		if (!uid == getUserID()) {
 			isFriends(uid, getUserID());
 			var checker = setInterval(function() {
-				if (getResponseCode() == 1) {
+				if (getResponseCode() == 2) {
 					clearInterval(checker);
 					view1.add(addFriendBtn);
 				} else if (getResponseCode() == -2) {

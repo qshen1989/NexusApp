@@ -18,19 +18,12 @@ function MainWindowTabGroup() {
 	homeWindow.containingTab = homeTab;
 	self.addTab(homeTab);
 
-	var friendsTab = Ti.UI.createTab({
-		window : friendsWindow,
-		icon:'images/tab2.png'
-	});
-	friendsWindow.containgTab = friendsTab;
-	self.addTab(friendsTab);
-
 	var topicsTab = Ti.UI.createTab({
 		window : topicsWindow,
 		icon:'images/tab3.png',
 	});
 	topicsWindow.containgTab = topicsTab;
-	self.addEventListener('click', function(e) {
+	/*self.addEventListener('click', function(e) {
 		Titanium.API.info(e.index);
 		getTopicsByPopularity();
 		var checker = setInterval(function() {
@@ -40,9 +33,15 @@ function MainWindowTabGroup() {
 
 			}
 		}, 500);
-	});
-	topicsWindow.containgTab = topicsTab;
+	});*/
 	self.addTab(topicsTab);
+	
+	var friendsTab = Ti.UI.createTab({
+		window : friendsWindow,
+		icon:'images/tab2.png'
+	});
+	friendsWindow.containgTab = friendsTab;
+	self.addTab(friendsTab);
 	
 	setHomeWindow(homeWindow);
 	setFriendsWindow(friendsWindow);
@@ -51,7 +50,7 @@ function MainWindowTabGroup() {
 	self.addEventListener('click',function(e){
 		alert(e.index);
 	});
-	self.setActiveTab(2);
+	self.setActiveTab(1);
 	return self;
 }
 

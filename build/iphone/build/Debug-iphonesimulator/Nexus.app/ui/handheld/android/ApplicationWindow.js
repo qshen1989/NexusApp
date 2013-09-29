@@ -1,1 +1,0 @@
-/Users/qianshen/Desktop/NexusApp/Resources/ui/handheld/android/ApplicationWindow.js

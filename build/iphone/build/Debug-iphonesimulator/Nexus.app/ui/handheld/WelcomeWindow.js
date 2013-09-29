@@ -1,1 +1,0 @@
-/Users/qianshen/Desktop/NexusApp/Resources/ui/handheld/WelcomeWindow.js

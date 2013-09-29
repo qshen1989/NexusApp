@@ -2,12 +2,11 @@
 function TopicsWindow() {
 	//load component dependencies
 	var TopicsView = require('ui/common/TopicsView');
-
 	//create component instance
 	var self = Ti.UI.createWindow({
 		backgroundColor : '#ffffff',
 		navBarHidden : false,
-
+		barImage:'images/TopicsPage/TOPICS_02.png'
 	});
 
 	var leftBtn = Ti.UI.createButton({

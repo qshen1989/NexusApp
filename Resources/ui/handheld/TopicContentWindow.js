@@ -5,41 +5,43 @@ function TopicContentWindow() {
 		
 	//create component instance
 	var self = Ti.UI.createWindow({
-		backgroundColor:'#333333',
-	});
+		backgroundImage:'images/TopicContentPage/Topic_02.png'	
+		});
 	
 	var back = Titanium.UI.createButton({
 		title : 'back',
 		color : '#344322',
-		style : Titanium.UI.iPhone.SystemButtonStyle.BORDERED
+		top: 10,
+		left: 20,
+		height:30,
+		width:50
 	});
-
-	var topic = Titanium.UI.createButton({
-		title : 'Topic',
-		width : 200,
-		backgroundColor : '#556655'
-		//style : Titanium.UI.iPhone.SystemButtonStyle.BORDERED
-	});
+	
+	self.add(back);
 
 	var reply = Titanium.UI.createButton({
 		title : 'Reply',
-		backgroundColor : '#344322',
-		style : Titanium.UI.iPhone.SystemButtonStyle.BORDERED
+		top: 10,
+		right: 20,
+		height:30,
+		width:50
 	});
+	
+	self.add(reply);
 
 	flexSpace = Titanium.UI.createButton({
 		systemButton : Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
 	});
 
 	var toolbar = Titanium.UI.iOS.createToolbar({
-		items : [back, flexSpace, topic, flexSpace, reply],
-		barColor : '#344322',
+		items : [back, flexSpace, reply],
+		backgroundImage:'images/TopicContentPage/bar.png',
 		top : 0,
 		borderTop : true,
 		borderBottom : false,
 	});
 	
-	self.add(toolbar);
+	//self.add(toolbar);
 		
 	//construct UI
 	back.addEventListener('click',function(e){
