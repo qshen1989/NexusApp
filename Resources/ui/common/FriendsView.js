@@ -83,7 +83,7 @@ function FriendsView() {
 			backgroundColor:'white'
 		});
 		
-	win.add(tableView);
+    self.add(tableView);
 	
 	return self;
 }
