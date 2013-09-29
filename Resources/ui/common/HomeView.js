@@ -29,6 +29,7 @@ function HomeView(uid) {
 	//
 	var data = [];
 	initData();
+	getMyTopics();
 
 	function initData() {
 		getUserInfo(uid);
@@ -36,10 +37,9 @@ function HomeView(uid) {
 			if (getResponseCode() == 1) {
 				clearInterval(checker);
 				data = parseUserInfo();
-				alert(data);
 				if (data != null) {
-				var nameLabel = Ti.UI.createLabel({
-				//		text : data[0].firstName + " " + data[0].lastName,
+					var nameLabel = Ti.UI.createLabel({
+						//		text : data[0].firstName + " " + data[0].lastName,
 						font : {
 							fontSize : 20,
 							fontWeight : 'bold'
@@ -47,19 +47,19 @@ function HomeView(uid) {
 						top : 25,
 						left : 95
 					});
-				view1.add(nameLabel);
+					view1.add(nameLabel);
 				}
-		var nameLabel = Ti.UI.createLabel({
-			text : data[0].firstName + " " + data[0].lastName,
-			font : {
-				fontSize : 20,
-				fontWeight : 'bold'
-			},
-			top : 25,
-			left : 95
-		});
+				var nameLabel = Ti.UI.createLabel({
+					text : data[0].firstName + " " + data[0].lastName,
+					font : {
+						fontSize : 20,
+						fontWeight : 'bold'
+					},
+					top : 25,
+					left : 95
+				});
 
-		view1.add(nameLabel);
+				view1.add(nameLabel);
 			}
 		}, 500);
 	}
@@ -88,7 +88,7 @@ function HomeView(uid) {
 		if (!uid == getUserID()) {
 			isFriends(uid, getUserID());
 			var checker = setInterval(function() {
-				if (getResponseCode() == 2) {
+				if (getResponseCode() == 1) {
 					clearInterval(checker);
 					view1.add(addFriendBtn);
 				} else if (getResponseCode() == -2) {
@@ -99,10 +99,80 @@ function HomeView(uid) {
 
 	}
 
-	var TopicsView = require('ui/common/TopicsView');
-
-	topicsView = new TopicsView();
+	var topicsView = Ti.UI.createScrollView();
 	topicsView.setTop(view1.height);
+
+	
+	
+	getTopics();
+
+	function getTopics() {
+		var checker = setInterval(function() {
+			if (getResponseCode() == 1) {
+				clearInterval(checker);
+				addTopicView();
+			} else if (getResponseCode() == -2) {
+				alert('Network Error, please try again later');
+			}
+		}, 500);
+	}
+	
+	function  addTopicView(){
+		var topics = getMyTopicList();
+		for (var i = 0; i < data.length; i++) {
+			var topicView = Ti.UI.createView({
+				top : 10,
+				backgroundColor : '#ffffff',
+			});
+			var user = Ti.UI.createLabel({
+				color : '#576996',
+				font : {
+					fontSize : 16,
+					fontWeight : 'bold',
+					fontFamily : 'Arial'
+				},
+				left : 10,
+				top : 2,
+				height : 15,
+				width : 200,
+				clickName : 'user',
+				text : data[0].firstName+' '+data[0].lastName
+			});
+			topicView.add(user);
+			var title = Ti.UI.createLabel({
+				color : '#FF6666',
+				font : {
+					fontSize : 16,
+					fontFamily : 'Arial',
+					fontStyle: 'italic'
+				},
+				left : 50,
+				top : 2,
+				height : 10,
+				width : 200,
+				clickName : 'title',
+				text : data[0].title
+			});
+			topicView.add(title);
+			var content = Ti.UI.createLabel({
+				color : '#576996',
+				font : {
+					fontSize : 12,
+					fontFamily : 'Arial',
+				},
+				left : 10,
+				top : 20,
+				height : 30,
+				width : 200,
+				clickName : 'title',
+				text : topics[i].content
+			});
+			
+			topicView.add(content);
+		}
+	}
+
+
 	self.add(topicsView);
 
 	return self;
