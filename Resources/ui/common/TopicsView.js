@@ -20,7 +20,7 @@ function TopicsView() {
 		if (Titanium.App.Properties.getString('TopicList') == null) {
 			getTopicsByPopularity();
 			var checker = setInterval(function() {
-				if (getResponseCode() == 1) {
+				if (getResponseCode() == 2) {
 					clearInterval(checker);
 					data = getTopicList();
 				} else if (getResponseCode() == -2) {

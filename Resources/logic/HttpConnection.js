@@ -167,7 +167,7 @@ function getTopicsByPopularity() {
 		onload : function(e) {
 			Ti.API.info('GOT ' + this.responseText);
 			Titanium.App.Properties.setString('TopicList', this.responseText);
-			responseCode = 1;
+			responseCode = 2;
 			//alert('success');
 		},
 		// function called when an error occurs, including a timeout
