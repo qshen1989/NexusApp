@@ -3,9 +3,7 @@ function RegisterView() {
 	//create object instance, a parasitic subclass of Observable
 	var self = Ti.UI.createScrollView({
 		//backgroundImage:'images/RegisterPage/registerBG.png',
-		top:pxToDP(89),
-		borderColor : '#0000C6',
-		borderWidth : 2,
+		top:pxToDP(87),
 		maxZoomScale : 1.0,
 		minZoomScale : 1.0,
 		showHorizontalScrollIndicator : false,
@@ -13,6 +11,7 @@ function RegisterView() {
 		horizontalBounce : false,
 		verticalBounce : true,
 		scrollingEnabled:true,
+		borderWidth:0
 	});	
 	
 
@@ -32,7 +31,7 @@ function RegisterView() {
 		width : pxToDP(405),
 		height : pxToDP(52),
 		left : pxToDP(115),
-		top : pxToDP(230)
+		top : pxToDP(162)
 	});
 	view.add(usernameBox);
 
@@ -45,7 +44,7 @@ function RegisterView() {
 		width : pxToDP(405),
 		height : pxToDP(52),
 		left : pxToDP(115),
-		top : pxToDP(292)
+		top : pxToDP(235)
 	});
 	view.add(passwordBox);
 
@@ -58,7 +57,7 @@ function RegisterView() {
 		width : pxToDP(405),
 		height : pxToDP(52),
 		left : pxToDP(115),
-		top : pxToDP(440)
+		top : pxToDP(308)
 	});
 	view.add(repasswordBox);
 
@@ -67,22 +66,22 @@ function RegisterView() {
 		borderStyle : Ti.UI.INPUT_BORDERSTYLE_NONE,
 		clearButtonMode : Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
 		autocapitalization : false,
-		width : pxToDP(200),
+		width : pxToDP(405),
 		height : 40,
 		left : pxToDP(115),
-		top : pxToDP(514)
+		top : pxToDP(370)
 	});
 	view.add(lastNameBox);
 
 	var firstNameBox = Ti.UI.createTextField({
 		hintText : 'First Name',
-		borderStyle : Ti.UI.INPUT_BORDERSTYLE_LINE,
+		borderStyle : Ti.UI.INPUT_BORDERSTYLE_NONE,
 		clearButtonMode : Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
 		autocapitalization : false,
-		width : pxToDP(200),
+		width : pxToDP(405),
 		height : 40,
 		left : pxToDP(115),
-		top : pxToDP(588)
+		top : pxToDP(444)
 	});
 	view.add(firstNameBox);
 
@@ -93,13 +92,13 @@ function RegisterView() {
 
 	var emailBox = Ti.UI.createTextField({
 		hintText : 'Email',
-		borderStyle : Ti.UI.INPUT_BORDERSTYLE_LINE,
+		borderStyle : Ti.UI.INPUT_BORDERSTYLE_NONE,
 		clearButtonMode : Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
 		autocapitalization : false,
 		width : pxToDP(405),
 		height : 40,
 		left : pxToDP(115),
-		top : pxToDP(662)
+		top : pxToDP(520)
 	});
 	view.add(emailBox);
 
@@ -107,7 +106,7 @@ function RegisterView() {
 		backgroundImage: 'images/RegisterPage/registerBtn.png',
 		width: pxToDP(405),
 		height: pxToDP(78),
-		top : pxToDP(731),
+		top : pxToDP(620),
 		left : pxToDP(115)
 	});
 	view.add(registerBtn);
@@ -150,7 +149,7 @@ function RegisterView() {
 		backgroundImage:'images/RegisterPage/backBtn.png',
 		width: pxToDP(405),
 		height: pxToDP(78),
-		top : pxToDP(829),
+		top : pxToDP(730),
 		left : pxToDP(115)
 	});
 	view.add(backBtn);

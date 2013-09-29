@@ -38,7 +38,6 @@ function FriendsView() {
 	setTableData();
 
 	function setTableData() {
-		data = getFriendList();
 		if (Titanium.App.Properties.getString('FriendList') == null) {
 			getFriends();
 			var checker = setInterval(function() {
