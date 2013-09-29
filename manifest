@@ -1,9 +1,9 @@
-#appname: Nexus
-#appid: com.uf.nexus
-#type: mobile
-#guid: c57fa830-552e-471a-a73b-98c70fd7f93b
-#version: 1.0
-#publisher: not specified
-#url: not specified
-#image: appicon.png
-#desc: not specified
+#appname:Nexus
+#appid:com.uf.nexus
+#type:mobile
+#guid:c57fa830-552e-471a-a73b-98c70fd7f93b
+#version:1.0
+#publisher:qianshen
+#url:http://
+#image:appicon.png
+#desc:not specified

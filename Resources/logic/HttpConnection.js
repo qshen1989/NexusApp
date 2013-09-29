@@ -1,7 +1,7 @@
 Ti.include('UserData.js');
-var URL_LOGIN = "http://192.168.1.107/myWOW/login.php";
-var URL_REGISTER = "http://192.168.1.107/myWOW/register.php";
-var URL_DATA = "http://192.168.1.107/myWOW/topic.php";
+var URL_LOGIN = "http://10.136.99.119/myWOW/login.php";
+var URL_REGISTER = "http://10.136.99.119/myWOW/register.php";
+var URL_DATA = "http://10.136.99.119/myWOW/topic.php";
 var responseCode = 0;
 
 function getLoginResponse(username, password) {
