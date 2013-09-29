@@ -17,7 +17,6 @@ function TopicsView() {
 	setTableData();
 	
 	function setTableData() {
-		data = getFriendList();
 		if (Titanium.App.Properties.getString('TopicList') == null) {
 			getTopicsByPopularity();
 			var checker = setInterval(function() {

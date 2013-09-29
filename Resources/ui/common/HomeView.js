@@ -162,6 +162,7 @@ function HomeView(uid) {
 			});
 
 			topicView.add(content);
+			topicsView.add(topicView);
 		}
 	}
 
