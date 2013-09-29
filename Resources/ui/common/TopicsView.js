@@ -12,7 +12,7 @@ function TopicsView() {
 		filterAttribute : 'filter',
 		backgroundColor : 'white'
 	});
-	var data = getTopicList();
+	var data;
 	var tableData = [];
 	setTableData();
 	function setTableData() {

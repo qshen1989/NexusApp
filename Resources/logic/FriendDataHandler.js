@@ -1,29 +1,16 @@
-Ti.include('UserData.js');
-var URL_PREFIX = "http://192.168.1.107/myWOW/topic.php?";
-var responseCode = 0;
-
-
-function showFriends(){
-	responseCode = 0;
-	var client = Ti.Network.createHTTPClient({
-		// function called when the response data is available
-		onload : function(e) {
-			    Ti.API.info('GOT ' + this.responseText);
-				Ti.App.Properties.setString('friendsXML', this.responseText);
-				responseCode = 1;
-		},
-		// function called when an error occurs, including a timeout
-		onerror : function(e) {
-			Ti.API.debug(e.error);
-			responseCode = -2;
-			//alert('error');
-		},
-		timeout : 5000 // in milliseconds
-	});
-	// Prepare the connection.
-	var url = URL_PREFIX + "f=showFriends&userID=" + getUserID();
-	Titanium.API.info(url);
-	client.open("GET", url);
-	// Send the request.
-	client.send();
+function getFriendList(){
+	var xml = Titanium.App.Properties.getString('FriendList');
+	xml = Titanium.XML.parseString(xml);
+	var contents = xml.documentElement.getElementsByTagName('friend');
+	var data = [];
+	for (var i=0;i<contents.length;++i){
+		data.push({
+			id: contents.item(i).getElementsByTagName('friendID').item(0).text,
+			lastname: contents.item(i).getElementsByTagName('lastName').item(0).text,
+			firstname: contents.item(i).getElementsByTagName('firstName').item(0).text,
+			email: contents.item(i).getElementsByTagName('friendID').item(0).text,
+		});
+	}
+	return data;
 }
+
