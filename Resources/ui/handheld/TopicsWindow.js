@@ -11,7 +11,6 @@ function TopicsWindow() {
 	});
 
 	//construct UI
-	var topicsView = new TopicsView();
 
 	var send = Titanium.UI.createButton({
 		title : 'Q1',
@@ -44,20 +43,29 @@ function TopicsWindow() {
 		borderBottom : false,
 	});
 	//Ti.API.info(toolbar.height);
-	
-	self.addEventListener('focus',function(e){
+	var topicsView;
+	self.addEventListener('focus', function(e) {
 		Titanium.API.info('got topics');
-		getTopicsByPopularity();
-		var checker = setInterval(function(){
-			if (getResponseCode() == 1){
-				
-			}else if(getResponseCode() == -2){
-				
-			}
-		},500);
+		if (Titanium.App.Properties.getString('TopicList') == null) {
+			getTopicsByPopularity();
+			var checker = setInterval(function() {
+				if (getResponseCode() == 1) {
+					clearInterval(checker);
+					topicsView = new TopicsView();
+					self.add(topicsView);
+				} else if (getResponseCode() == -2) {
+					clearInterval(checker);
+					alert('Connection Error');
+				}
+			}, 500);
+		}
+		else{
+			topicsView = new TopicsView();
+			self.add(topicsView);
+		}
 	});
 	self.add(toolbar);
-	self.add(topicsView);
+	//self.add(topicsView);
 
 	return self;
 
