@@ -49,6 +49,17 @@ function HomeView(uid) {
 					});
 				view1.add(nameLabel);
 				}
+		var nameLabel = Ti.UI.createLabel({
+			text : data[0].firstName + " " + data[0].lastName,
+			font : {
+				fontSize : 20,
+				fontWeight : 'bold'
+			},
+			top : 25,
+			left : 95
+		});
+
+		view1.add(nameLabel);
 			}
 		}, 500);
 	}
