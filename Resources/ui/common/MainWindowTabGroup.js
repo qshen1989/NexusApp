@@ -30,22 +30,27 @@ function MainWindowTabGroup() {
 		window : topicsWindow
 	});
 	topicsWindow.containgTab = topicsTab;
-	self.addEventListener('click',function(e){
+	self.addEventListener('click', function(e) {
 		Titanium.API.info(e.index);
 		getTopicsByPopularity();
-		var checker = setInterval(function(){
-			if (getResponseCode() == 1){
-				
-			}else if(getResponseCode() == -2){
-				
+		var checker = setInterval(function() {
+			if (getResponseCode() == 1) {
+
+			} else if (getResponseCode() == -2) {
+
 			}
-		},500);
+		}, 500);
 	});
 	topicsWindow.containgTab = topicsTab;
 	self.addTab(topicsTab);
-
 	
+	setHomeWindow(homeWindow);
+	setFriendsWindow(friendsWindow);
+	setTopicsWindow(topicsWindow);
 	
+	self.addEventListener('click',function(e){
+		alert(e.index);
+	});
 	self.setActiveTab(2);
 	return self;
 }

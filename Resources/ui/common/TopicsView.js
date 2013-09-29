@@ -24,7 +24,7 @@ function TopicsView() {
 			row.selectedBackgroundColor = '#f2f2f2';
 			row.height = 100;
 			row.hasChild = true;
-			row.url = '../ui/handheld/TopicContentWindow.js';
+			row.url = '/ui/handheld/TopicContentWindow';
 
 			var photo = Ti.UI.createView({
 				backgroundImage : '/images/TopicsPage/user.png',
@@ -165,7 +165,13 @@ function TopicsView() {
 		lastDistance = distance;
 	});
 	self.addEventListener('click',function(e){
-		alert(e.index);
+		
+		var NewWindow = require(e.rowData.url);
+		var parentWindow = getTopicsWindow();
+		alert(parentWindow.containgTab.title);
+		var newWindow = new NewWindow({title:'haha',tabGroup:parentWindow.tabGroup});
+		newWindow.setLeft(320);
+		newWindow.open(slip_from_right);
 	});
 	
 	return self;
