@@ -1,5 +1,6 @@
 function getFriendList() {
 	var xml = Titanium.App.Properties.getString('FriendList');
+	Ti.API.info(xml);
 	xml = Titanium.XML.parseString(xml);
 	var contents = xml.documentElement.getElementsByTagName('friend');
 	var data = [];

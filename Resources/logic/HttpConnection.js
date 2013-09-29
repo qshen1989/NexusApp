@@ -187,6 +187,35 @@ function getTopicsByPopularity() {
 
 }
 
+function getMyTopics() {
+	responseCode = 0;
+	Titanium.API.info("Get my topics");
+	var client = Ti.Network.createHTTPClient({
+		// function called when the response data is available
+		onload : function(e) {
+			Ti.API.info('GOT ' + this.responseText);
+			Titanium.App.Properties.setString('MyTopicList', this.responseText);
+			responseCode = 1;
+			//alert('success');
+		},
+		// function called when an error occurs, including a timeout
+		onerror : function(e) {
+			Ti.API.debug(e.error);
+			responseCode = -2;
+			//alert('error');
+		},
+		timeout : 5000 // in milliseconds
+	});
+	// Prepare the connection.
+	var url = URL_DATA + '?f=myTopics&userID='+getUserID();
+	Titanium.API.info(url);
+	client.open("GET", url);
+	// Send the request.
+	client.send();
+
+}
+
+
 function getTopicsByTime() {
 	Titanium.API.info('haha');
 }
