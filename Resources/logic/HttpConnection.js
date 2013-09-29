@@ -215,7 +215,7 @@ function getFriends(){
 		timeout : 5000 // in milliseconds
 	});
 	// Prepare the connection.
-	var url = URL_PREFIX + "f=showFriends&userID=" + getUserID();
+	var url = URL_DATA + "?f=showFriends&userID=" + getUserID();
 	Titanium.API.info(url);
 	client.open("GET", url);
 	// Send the request.
