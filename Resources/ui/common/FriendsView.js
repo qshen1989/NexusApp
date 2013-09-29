@@ -8,7 +8,7 @@ function FriendsView() {
 	//label using localization-ready strings from <app dir>/i18n/en/strings.xml
 	var self = Titanium.UI.createView({
 		backgroundColor : '#220992',
-		top : 40
+		top : 0
 	});
 
 	var search = Titanium.UI.createSearchBar({
@@ -81,6 +81,8 @@ function FriendsView() {
     }}
     }
     
+    buildTableData();
+    
     tableView = Titanium.UI.createTableView({
 			data:data,
 			search:search,
@@ -88,7 +90,7 @@ function FriendsView() {
 			backgroundColor:'white'
 		});
 		
-	win.add(tableView);
+	self.add(tableView);
 	
 	return self;
 }
