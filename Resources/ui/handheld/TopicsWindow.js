@@ -6,6 +6,7 @@ function TopicsWindow() {
 	//create component instance
 	var self = Ti.UI.createWindow({
 		backgroundColor:'#ffffff',
+		title:'Topics'
 	});
 		
 	//construct UI

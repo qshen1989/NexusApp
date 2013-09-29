@@ -6,6 +6,7 @@ function HomeWindow() {
 	//create component instance
 	var self = Ti.UI.createWindow({
 		backgroundColor:'#ffffff',
+		title:'Home'
 	});
 		
 	//construct UI

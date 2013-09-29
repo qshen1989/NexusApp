@@ -6,6 +6,7 @@ function FriendsWindow() {
 	//create component instance
 	var self = Ti.UI.createWindow({
 		backgroundColor:'#ffffff',
+		title:'Friends'
 	});
 		
 	//construct UI
