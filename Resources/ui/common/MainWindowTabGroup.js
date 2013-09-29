@@ -12,21 +12,18 @@ function MainWindowTabGroup() {
 	var topicsWindow = new TopicsWindow();
 
 	var homeTab = Ti.UI.createTab({
-		title : 'Home',
 		window : homeWindow
 	});
 	homeWindow.containingTab = homeTab;
 	self.addTab(homeTab);
 
 	var friendsTab = Ti.UI.createTab({
-		title : 'Friends',
 		window : friendsWindow
 	});
 	friendsWindow.containgTab = friendsTab;
 	self.addTab(friendsTab);
 
 	var topicsTab = Ti.UI.createTab({
-		title : 'Topics',
 		window : topicsWindow
 	});
 	topicsWindow.containgTab = topicsTab;

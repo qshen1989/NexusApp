@@ -63,7 +63,7 @@ function FriendsView() {
 			row.height = 60;
 
 			var photo = Ti.UI.createView({
-				backgroundImage : '/images/FriendsPage/gator'+(i+1)%5+'.png',
+				backgroundImage : '/images/FriendsPage/gator'+(i+1)%6+'.png',
 				top : 0,
 				left : 0,
 				width : 58.5,
@@ -95,9 +95,8 @@ function FriendsView() {
 
 	var updating = false;
 	var loadingRow = Ti.UI.createTableViewRow({
-		title : "Loading...",
-		font:{fontSize:13,fontFamliy:'Arial'},
-		height:60
+		backgroundImage:'images/FriendsPage/loading.png',
+		height:pxToDP(140),
 	});
 
 	function beginUpdate() {
@@ -109,7 +108,7 @@ function FriendsView() {
 		getFriends();
 		self.insertRowBefore(0,loadingRow, {
 			animated : true,
-			animationStyle : Titanium.UI.iPhone.RowAnimationStyle.TOP
+			animationStyle : Titanium.UI.iPhone.RowAnimationStyle.BOTTOM
 		});
 		// just mock out the reload
 		setTimeout(endUpdate, 2000);
@@ -143,7 +142,7 @@ function FriendsView() {
 		// going down is the only time we dynamically load,
 		// going up we can safely ignore -- note here that
 		// the values will be negative so we do the opposite
-		if (offset < -30) {
+		if (offset < -70) {
 			// adjust the % of rows scrolled before we decide to start fetching
 			var nearEnd = theEnd * .75;
 
