@@ -17,17 +17,19 @@ function getFriendList() {
 function parseUserInfo() {
 	var xml = Titanium.App.Properties.getString('UserInfo');
 
-	xml = Titanium.XML.parseString(xml);
-	var user = xml.documentElement.getElementsByTagName('Info');
+	var parsedXML = Titanium.XML.parseString(xml);
+	var userName = parsedXML.documentElement.getElementsByTagName('userName').item(0).text;
+	var firstName = parsedXML.documentElement.getElementsByTagName('firstName').item(0).text;
+	var lastName = parsedXML.documentElement.getElementsByTagName('lastName').item(0).text;
+	var email = parsedXML.documentElement.getElementsByTagName('email').item(0).text;
 	var data = [];
-	for (var i = 0; i < user.length; ++i) {
-		data.push({
-			userName : user.item(0).getElementsByTagName('userName').item(0).text,
-			email : user.item(0).getElementsByTagName('email').item(0).text,
-			firstName : user.item(0).getElementsByTagName('firstName').item(0).text,
-			lastName : user.item(0).getElementsByTagName('lastName').item(0).text
-		});
-	}
+	data.push({
+		userName : userName,
+		email : email,
+		firstName : firstName,
+		lastName : lastName
+	});
+
 	return data;
 }
 

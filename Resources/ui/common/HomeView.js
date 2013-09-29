@@ -36,7 +36,6 @@ function HomeView(uid) {
 			if (getResponseCode() == 1){
 				clearInterval(checker);
 				data = parseUserInfo();
-				alert(data);
 		var nameLabel = Ti.UI.createLabel({
 			text : data[0].firstName + " " + data[0].lastName,
 			font : {
