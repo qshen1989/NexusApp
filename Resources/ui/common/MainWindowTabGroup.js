@@ -1,3 +1,4 @@
+Ti.include('../logic/CommonFunctions.js');
 function MainWindowTabGroup() {
 	var self = Ti.UI.createTabGroup({
 		backgroundColor : '#333333',
@@ -27,6 +28,17 @@ function MainWindowTabGroup() {
 	var topicsTab = Ti.UI.createTab({
 		title : 'Topics',
 		window : topicsWindow
+	});
+	
+	topicsTab.addEventListener('focus',function(e){
+		getTopics();
+		var checker = setInterval(function(){
+			if (getResponseCode() == 1){
+				
+			}else if(getResponseCode() == -2){
+				
+			}
+		},500);
 	});
 	topicsWindow.containgTab = topicsTab;
 	self.addTab(topicsTab);

@@ -107,7 +107,7 @@ function register(firstname,lastname,email,fbuid){
 	if(getResponseCode() == 1){
 		clearInterval(checker);
 		alert('Register succeed!');
-	} else if(getResponseCode() == -1){
+	} else if(getResponseCode() == -2){
 		alert('Connection Error. Please try again later');
 	}
 	},500);
