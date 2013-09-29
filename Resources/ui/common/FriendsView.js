@@ -65,8 +65,12 @@ function FriendsView() {
 
 	}
 	
-	showFriends();
+	function buildTableData(){
 	
+	showFriends();
+	var checker = setInterval(function (){
+		
+	},500);
 	var friendXML = Ti.App.Properties.getString('friendsXML');
 	if (friendXML!=null){
 	var xmlData = Ti.XML.parseString(friendXML);
@@ -75,6 +79,7 @@ function FriendsView() {
     for (var i=0; i<friends.length;i++){
     	createUserRow(friends.item(i).getElementByTagName("friendID").item(0).text, friends.item(i).getElementByTagName("userName").item(0).text);
     }}
+    }
     
     tableView = Titanium.UI.createTableView({
 			data:data,
