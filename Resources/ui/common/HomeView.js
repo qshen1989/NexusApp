@@ -115,13 +115,16 @@ function HomeView(uid) {
 			}
 		}, 500);
 	}
+    
+    var topPosition = 20;
+
 
 	function addTopicView() {
 		var topics = getMyTopicList();
-		for (var i = 0; i < data.length; i++) {
+		for (var i = 0; i < topics.length; i++) {
 			var backgroundPath = 'images/home/Homepage_' + (i % 4 + 1) + '.png';
 			var topicView = Ti.UI.createView({
-				top : 20,
+				top : topPosition+i*pxToDP(250),
 				backgroundImage : backgroundPath,
 				width : pxToDP(600),
 				left : pxToDP(18),
