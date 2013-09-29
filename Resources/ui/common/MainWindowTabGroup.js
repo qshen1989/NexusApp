@@ -12,19 +12,22 @@ function MainWindowTabGroup() {
 	var topicsWindow = new TopicsWindow();
 
 	var homeTab = Ti.UI.createTab({
-		window : homeWindow
+		window : homeWindow,
+		icon:'images/tab1.png',
 	});
 	homeWindow.containingTab = homeTab;
 	self.addTab(homeTab);
 
 	var friendsTab = Ti.UI.createTab({
-		window : friendsWindow
+		window : friendsWindow,
+		icon:'images/tab2.png'
 	});
 	friendsWindow.containgTab = friendsTab;
 	self.addTab(friendsTab);
 
 	var topicsTab = Ti.UI.createTab({
-		window : topicsWindow
+		window : topicsWindow,
+		icon:'images/tab3.png',
 	});
 	topicsWindow.containgTab = topicsTab;
 	self.addEventListener('click', function(e) {

@@ -61,6 +61,8 @@ function FriendsView() {
 			row.selectedBackgroundColor = '#385292';
 			row.hasChild = true;
 			row.height = 60;
+			row.url = '/ui/handheld/HomeWindow';
+			row.id = data[i].id;
 
 			var photo = Ti.UI.createView({
 				backgroundImage : '/images/FriendsPage/gator'+(i+1)%6+'.png',
@@ -84,7 +86,7 @@ function FriendsView() {
 				height : 30,
 				width : 200,
 				clickName : userID,
-				text : data[i].lastname + ' ' + data[i].firstname
+				text : data[i].firstname + ' ' + data[i].lastname
 			});
 
 			row.filter = user.text;
@@ -155,6 +157,16 @@ function FriendsView() {
 
 	//self.setSearch(search);
 	self.setData(tableData);
+	
+	self.addEventListener('click',function(e){
+		
+		var NewWindow = require(e.rowData.url);
+		var parentWindow = getFriendsWindow();
+		Titanium.API.info(e.rowData.id);
+		var newWindow = new NewWindow(e.rowData.id,{title:'haha',tabGroup:parentWindow.tabGroup});
+		newWindow.setLeft(320);
+		newWindow.open(slip_from_right);
+	});
 
 	return self;
 }

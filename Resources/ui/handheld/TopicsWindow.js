@@ -6,20 +6,25 @@ function TopicsWindow() {
 	//create component instance
 	var self = Ti.UI.createWindow({
 		backgroundColor : '#ffffff',
-		title : 'Topics',
 		navBarHidden : false,
 
 	});
 
 	var leftBtn = Ti.UI.createButton({
-		title : 'Q1',
+		title : 'Sort by Time',
 	});
 
 	self.setLeftNavButton(leftBtn);
+	
+	var rightBtn = Ti.UI.createButton({
+		title : 'Sort by Pop',
+	});
+	
+	self.setRightNavButton(rightBtn);
 
 	//construct UI
 	//Ti.API.info(toolbar.height);
-	var topicsView = new TopicsView();
+	var topicsView = new TopicsView(leftBtn,rightBtn);
 	self.add(topicsView);
 
 	//self.add(toolbar);

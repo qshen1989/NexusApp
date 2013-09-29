@@ -1,5 +1,5 @@
 Ti.include('../logic/CommonFunctions.js');
-function TopicsView() {
+function TopicsView(leftBtn, rightBtn) {
 	//create object instance, a parasitic subclass of Observable
 	//var self = Ti.UI.createTabGroup() { backgroundImage:'images/WelcomePage/welcomeBG.png'
 	//});
@@ -11,11 +11,33 @@ function TopicsView() {
 		filterAttribute : 'filter',
 		backgroundColor : 'white'
 	});
-	
+	var sortType = 'popularity';
 	var data;
 	var tableData = [];
+	function updateDataWithPopularity() {
+		if (Titanium.App.Properties.getString('TopicList') == null) {
+			getTopicsByPopularity();
+			var checker = setInterval(function() {
+				if (getResponseCode() == 2) {
+					clearInterval(checker);
+					data = getTopicList();
+				} else if (getResponseCode() == -2) {
+					clearInterval(checker);
+					alert('Connection Error');
+				}
+			}, 500);
+		} else {
+			Titanium.API.info(Titanium.App.Properties.getString('TopicList'));
+			data = getTopicList();
+		}
+	}
+
+	function updateDataWithTime() {
+
+	}
+
 	setTableData();
-	
+
 	function setTableData() {
 		if (Titanium.App.Properties.getString('TopicList') == null) {
 			getTopicsByPopularity();
@@ -40,7 +62,7 @@ function TopicsView() {
 			row.url = '/ui/handheld/TopicContentWindow';
 
 			var photo = Ti.UI.createView({
-				backgroundImage : '/images/TopicsPage/user.png',
+				backgroundImage : '/images/TopicsPage/type' +i%4 + '.png' ,
 				top : 5,
 				left : 10,
 				width : 50,
@@ -83,7 +105,7 @@ function TopicsView() {
 				height : 50,
 				width : 200,
 				clickName : 'comment',
-				text : 'No.' + (i + 1) + ' popular topic\n' + data[i].popularity + ' people attended'
+				text : 'No.' + (i + 1) + ' popular topic\n' + data[i].popularity + ' people participated'
 			});
 			row.add(comment);
 
@@ -120,7 +142,7 @@ function TopicsView() {
 	var updating = false;
 	var loadingRow = Ti.UI.createTableViewRow({
 		title : "Loading...",
-		height:50
+		height : 50
 	});
 
 	function beginUpdate() {
@@ -129,7 +151,7 @@ function TopicsView() {
 		self.setTop(20);
 		tableData = [];
 		getTopicsByPopularity();
-		self.insertRowBefore(0,loadingRow, {
+		self.insertRowBefore(0, loadingRow, {
 			animated : true,
 			animationStyle : Titanium.UI.iPhone.RowAnimationStyle.TOP
 		});
@@ -138,17 +160,20 @@ function TopicsView() {
 	}
 
 	function endUpdate() {
-		
+
 		updating = false;
 		setTableData();
 		self.deleteRow(0);
 		// simulate loading
-		
+
 		self.scrollToIndex(0, {
 			animated : true,
 			position : Ti.UI.iPhone.TableViewScrollPosition.NONE,
 		});
-		self.animate({top:0,duration:300});
+		self.animate({
+			top : 0,
+			duration : 300
+		});
 	}
 
 	var lastDistance = 0;
@@ -174,14 +199,27 @@ function TopicsView() {
 		}
 		lastDistance = distance;
 	});
-	self.addEventListener('click',function(e){
-		
+	self.addEventListener('click', function(e) {
+
 		var NewWindow = require(e.rowData.url);
 		var parentWindow = getTopicsWindow();
-		
-		var newWindow = new NewWindow({title:'haha',tabGroup:parentWindow.tabGroup});
+
+		var newWindow = new NewWindow({
+			title : 'haha',
+			tabGroup : parentWindow.tabGroup
+		});
 		newWindow.setLeft(320);
 		newWindow.open(slip_from_right);
+	});
+
+	//Sort by time
+	leftBtn.addEventListener('click', function(e) {
+
+	});
+
+	//Sort by popularity
+	rightBtn.addEventListener('click', function(e) {
+		beginUpdate();
 	});
 	self.setData(tableData);
 	return self;

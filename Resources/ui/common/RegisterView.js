@@ -170,12 +170,11 @@ function register(username, password, firstname, lastname, email) {
 		} else if (getResponseCode() == 2) {
 			clearInterval(checker);
 			alert('Register succeed!');
-			var Group = require('ui/common/MainWindowTabGroup');
-			var group = new Group();
-			group.setOpacity(0);
 			var registerWindow = getRegisterWindow();
-			registerWindow.close(get_darken);
-			group.open(get_lighter);
+			registerWindow.close(slip_to_right);
+			var LoginWindow = require('ui/handheld/LoginWindow');
+			var loginWindow = new LoginWindow();
+			loginWindow.open();
 		} else if (getResponseCode() == -2) {
 			alert('Connection Error. Please try again later');
 		}

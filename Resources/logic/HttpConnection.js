@@ -217,7 +217,30 @@ function getMyTopics() {
 
 
 function getTopicsByTime() {
-	Titanium.API.info('haha');
+	responseCode = 0;
+	Titanium.API.info("get Topics by Time");
+	var client = Ti.Network.createHTTPClient({
+		// function called when the response data is available
+		onload : function(e) {
+			Ti.API.info('GOT ' + this.responseText);
+			Titanium.App.Properties.setString('TopicList', this.responseText);
+			responseCode = 2;
+			//alert('success');
+		},
+		// function called when an error occurs, including a timeout
+		onerror : function(e) {
+			Ti.API.debug(e.error);
+			responseCode = -2;
+			//alert('error');
+		},
+		timeout : 5000 // in milliseconds
+	});
+	// Prepare the connection.
+	var url = URL_DATA + '?f=sortTopicByTime';
+	Titanium.API.info(url);
+	client.open("GET", url);
+	// Send the request.
+	client.send();
 }
 
 function getTopicDetails(topicID) {
