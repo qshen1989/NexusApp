@@ -105,6 +105,8 @@ function RegisterView() {
 
 	var registerBtn = Ti.UI.createButton({
 		backgroundImage: 'images/RegisterPage/registerBtn.png',
+		width: pxToDP(405),
+		height: pxToDP(78),
 		top : pxToDP(731),
 		left : pxToDP(115)
 	});
